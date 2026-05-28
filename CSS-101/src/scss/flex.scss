@@ -16,6 +16,8 @@
   padding: 25px 50px;
 
   border: 1px solid black;
+
+  display: flex;
 }
 
 .box-9 {
@@ -24,8 +26,6 @@
   border: 1px solid red;
 
   //box-9 style
-
-  display: inline-block;
 }
 
 .box-10 {
@@ -34,8 +34,6 @@
   border: 1px solid blue;
 
   //box-10 style
-
-  display: inline-block;
 }
 
 //////////////3.2/////////////////////////////////////
@@ -58,6 +56,9 @@
   height: 200px;
 
   //box-11 style
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .box-12 {
@@ -85,6 +86,11 @@
   border: 1px solid black;
 
   //box-13 Style
+  display: flex;
+  flex-direction: row; /* default value */
+  // flex-direction: row-reverse;
+  // flex-direction: column;
+  // flex-direction: column-reverse;
 }
 
 ///////////////3.4////////////////////////////////////
@@ -105,6 +111,18 @@
   border: 1px solid black;
 
   //box-14 Style
+  display: flex;
+  justify-content: flex-start; /* default value */
+  // justify-content: flex-end;
+  // justify-content: center;
+  // justify-content: space-between;
+  // justify-content: space-around;
+  // justify-content: space-evenly;
+  // align-items: stretch; /* default value */
+  align-items: flex-start;
+  // align-items: flex-end;
+  // align-items: center;
+  // align-items: baseline;
 }
 
 //////////////3.5////////////////////////////////////
@@ -119,13 +137,21 @@
 .box-15 {
   margin: 16px auto;
 
-  width: 420px;
+  /* 
+    Fix the width of the parent box so that the total area of the child boxes 
+    does not exceed the width of the parent box
+  */
+  width: 300px;
 
   height: 420px;
 
   border: 1px solid black;
 
   //box-15 Styles
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-content: space-between;
 }
 
 //////////////3.6///////////////////////////////////
@@ -144,10 +170,12 @@
   border: 1px solid black;
 
   //box-16 style
+  display: flex;
 }
 
 .box-17 {
   border: 1px solid black;
 
   //box-17 style
+  flex-grow: 1;
 }
