@@ -1,12 +1,18 @@
-///////////////3.1////////////////////////////////
-//box-9、box-10 要求样式
-//1. 运用生平所学，使 box-9 和 box-10 等高
-//2. content 过多时，box-9、box-10 能自动撑高
-///////////////////////////////////////////////////
+//////////////3.1//////////////////////////////////
+//Styling requirements for boxes-9 and-10
+
+//1. Using all available knowledge, make boxes-9 and-10 the same height.
+
+//2. When there is too much content, boxes-9 and-10 should automatically expand their height.
+
+////////////////////////////////////////////////////////////
 .box-8 {
-  //box-8样式
+  //Box-8 style
+
   width: 300px;
+
   margin: 16px auto;
+
   padding: 25px 50px;
 
   border: 1px solid black;
@@ -14,22 +20,31 @@
 
 .box-9 {
   width: 100px;
+
   border: 1px solid red;
-  //box-9样式
+
+  //box-9 style
+
   display: inline-block;
 }
 
 .box-10 {
   width: 100px;
+
   border: 1px solid blue;
-  //box-10 样式
+
+  //box-10 style
+
   display: inline-block;
 }
 
-///////////////3.2////////////////////////////////
-//box-11、box-12 要求样式
-//1. box-12 在 box-11 中水平、垂直 居中
-///////////////////////////////////////////////////
+//////////////3.2/////////////////////////////////////
+//box-11, box-12 style requirements
+
+//1. Box-12 should be horizontally and vertically centered within box-11
+
+/////////////////////////////////////////////////////////////
+
 .box-11,
 .box-12 {
   border: 1px solid black;
@@ -37,72 +52,102 @@
 
 .box-11 {
   margin: 16px auto;
+
   width: 200px;
+
   height: 200px;
-  //box-11 样式
+
+  //box-11 style
 }
 
 .box-12 {
   width: 100px;
+
   height: 100px;
 }
 
-///////////////3.3////////////////////////////////
-//box-13 要求样式
-//1. 依次对 box-13 应用 flex-direction 的各属性，并查看
-//区别
-///////////////////////////////////////////////////
+//////////////3.3////////////////////////////////////
+//box-13 style requirements
+
+//1. Apply each property of flex-direction to box-13 in turn and observe
+
+//differences
+
+/////////////////////////////////////////////////////////
+
 .box-13 {
   margin: 16px auto;
+
   width: 300px;
+
   height: 300px;
 
   border: 1px solid black;
-  //box-13 样式
+
+  //box-13 Style
 }
 
-///////////////3.4////////////////////////////////
-//box-14 要求样式
-//1. 依次对 box-14 应用 justify-content 和 align-items
-//的各个属性，并查看区别
-///////////////////////////////////////////////////
+///////////////3.4////////////////////////////////////
+
+//box-14 Style Requirements
+
+//1. Apply the properties of justify-content and align-items to box-14 in sequence and observe the differences
+
+//////////////////////////////////////////////////////////////
+
 .box-14 {
   margin: 16px auto;
+
   width: 300px;
+
   height: 300px;
 
   border: 1px solid black;
-  //box-14 样式
+
+  //box-14 Style
 }
 
-///////////////3.5////////////////////////////////
-//box-15 要求样式
-//1. 运用 flex-wrap 和 align-content 将 4个 box-12
-//分别放置在 box-14的四个角
-///////////////////////////////////////////////////
+//////////////3.5////////////////////////////////////
+//box-15 Style Requirements
+
+//1. Use flex-wrap and align-content to place the four boxes-12
+
+//into the four corners of box-14 respectively
+
+////////////////////////////////////////////////////////
+
 .box-15 {
   margin: 16px auto;
+
   width: 420px;
+
   height: 420px;
 
   border: 1px solid black;
-  //box-15 样式
+
+  //box-15 Styles
 }
 
-///////////////3.6////////////////////////////////
-//box-16、box-17 要求样式
-//1. 通过 flex-grow 使 box-17 占据 box-16 元素的其余宽度
-///////////////////////////////////////////////////
+//////////////3.6///////////////////////////////////
+//box-16, box-17 style requirements
+
+//1. Use flex-grow to make box-17 occupy the remaining width of the box-16 element
+
+/////////////////////////////////////////////////////////////
 .box-16 {
   margin: 16px auto;
+
   width: 300px;
+
   height: 100px;
 
   border: 1px solid black;
-  //box-16 样式
+
+  //box-16 style
 }
 
 .box-17 {
   border: 1px solid black;
-  //box-17 样式
+
+  //box-17 style
 }
