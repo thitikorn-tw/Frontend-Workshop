@@ -68,15 +68,15 @@ function foo () {
 
 var age = 12;
 
-console.log(a); // Scopes can be nested
+console.log(name); // Scopes can be nested
 
-console.log(b); // Each nested inner scope can access variables in the outer scope
+console.log(age); // Each nested inner scope can access variables in the outer scope
 
 }
 
-console.log(a);
+console.log(name);
 
-console.log(b); // ReferenceError
+console.log(age); // ReferenceError
 
 ```
 
@@ -93,6 +93,9 @@ console.log("text:" + text);
 var text='hello world';
 
 }
+
+ans: text: undefined
+
 ```
 
 ``javascript
@@ -110,6 +113,8 @@ var i = 6;
 }
 
 }
+
+ans: undefined
 
 ````
 
@@ -139,9 +144,9 @@ console.log("block c:" + c);
 
 }
 
-console.log("function b:" + b); // ReferenceError
+console.log("function b:" + b);
 
-console.log("function c:" + c); // ReferenceError
+console.log("function c:" + c);
 
 }
 
@@ -186,17 +191,17 @@ console.log("function c:" + c); // ReferenceError
 > Try it yourself
 
 ```javascript
-typeof '5' = ?
+typeof '5' === 'string'
 
-typeof a=>a = ?
+typeof a=>a === 'function'
 
-typeof typeof 5 = ?
+typeof typeof 5 === 'string'
 
-typeof [1,2,3] = ?
+typeof [1,2,3] === 'object'
 
-typeof {a:5} = ?
+typeof {a:5} === 'object'
 
-typeof undefined = ?
+typeof undefined === 'undefined'
 
 ```
 
@@ -209,9 +214,9 @@ Only one value, i.e., undefined
 ```javascript
 let sss;
 
-console.log(typeof sss); //Undefined
+console.log(typeof sss); // 'undefined'
 
-console.log(typeof nonExist); //Undefined
+console.log(typeof nonExist); // 'undefined'
 ```
 
 #### Null has only one value, null, which represents an empty object pointer.
@@ -219,10 +224,13 @@ console.log(typeof nonExist); //Undefined
 ```javascript
 let aNull = null;
 
-console.log(typeof aNull); //'Object'
+console.log(typeof aNull); //'object'
 ```
 
 > What is the difference between Null and Undefined?
+
+typeof Null is 'object'
+typeof Undefined is 'undefined'
 
 #### Boolean
 
@@ -237,13 +245,13 @@ let jsSucks = false;
 ##### _Boolean(expression)_ Checks if a value is true
 
 ```javascript
-Boolean("false");
+Boolean("false"); // true
 
-Boolean(-5);
+Boolean(-5); // true
 
-Boolean("");
+Boolean(""); // false
 
-Boolean((a) => a);
+Boolean((a) => a); // true
 ```
 
 ##### Be careful of implicit type conversion
@@ -283,6 +291,12 @@ Number.MIN_VALUE, Number.MAX_VALUE, Infinity, -Infinity, NaN
 
 > Try using the typeof keyword to check the type of these constants
 
+typeof Number.MIN_VALUE // 'number'
+typeof Number.MAX_VALUE // 'number'
+typeof Infinity // 'number'
+typeof -Infinity // 'number'
+typeof NaN // 'number'
+
 ##### Numerical Transformation Functions
 
 Number(anything), parseInt(str, base), parseFloat(str)
@@ -315,13 +329,16 @@ String(1234); // '1234'
 
 > What is the difference between String() and toString()?
 
+toString() use by access from String.toString only
+String use by cast any types
+
 > Try it yourself
 
 ```javascript
 
-null.toString() = ?
+null.toString() = TypeError
 
-String(null) = ?
+String(null) = 'null'
 
 ```
 
@@ -388,7 +405,7 @@ b++; // b = 6+
 ```javascript
 23 > 3; // true
 
-"23" > "3"; // ?
+"23" > "3"; // false
 ```
 
 5. Equality Operators: ==, ===, Object.is()
@@ -447,6 +464,9 @@ const name = person.name;
 const book = { author: { name: "David", gender: "male" } };
 
 // Please use ES6 format to retrieve the values ​​of name and gender in one line of code
+const {
+  author: { name, gender },
+} = book;
 ```
 
 ### Objects are a reference type
@@ -460,16 +480,15 @@ let bbbb = aaaa;
 
 aaaa = 5;
 
-bbbb = ?;
+bbbb = 4;
 
-let objectA = {name: 'Alice'};
+let objectA = { name: "Alice" };
 
 let objectB = objectA;
 
-objectB.name = 'Tom';
+objectB.name = "Tom";
 
-objectA.name = ?
-
+objectA.name = "Tom";
 ```
 
 ### Object destructuring assignment
@@ -492,21 +511,19 @@ console.log(b); // 1
 
 Arrays are very important objects.
 
-```javascript` ...`javascript`
-`````````````````````````````"1"1"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""" `javascript
-const aArray = [1,2,3,4];
+```javascript
+const aArray = [1, 2, 3, 4];
 
 aArray[1]; // 2
+```
 
-````
 > Try it yourself
 
 ```javascript
-let aArray = [1,2,3,4];
+let aArray = [1, 2, 3, 4];
 
-typeof aArray; // ?
-
-````
+typeof aArray; // 'object'
+```
 
 #### Some commonly used properties of Array
 
@@ -520,17 +537,27 @@ Detect array: Array.isArray()
 > Try it yourself
 
 ```javascript
-
 // Provide an array a = [1,4,5,2,6], take out the odd numbers in the array to generate a new array [1,5], then multiply each element of the array by 2, finally get [2,10]
 
 // You will need to use the filter() and map() functions
 
-let arrayInput = [1,4,5,2,6];
+let arrayInput = [1, 4, 5, 2, 6];
 
 // Add your code
 
-let expectedResult = ; //Should be [2,10]
+// take out the odd numbers
+// generate a new array
+const oddNumbers = arrayInput.filter((number) => number % 2 !== 0);
 
+// multiply each element of the array by 2
+const actualResult = oddNumbers.map((number) => number * 2);
+
+let expectedResult; //Should be [2,10]
+
+const isPassed =
+  JSON.stringify(actualResult) === JSON.stringify(expectedResult);
+
+console.log("Test Result:", isPassed); // should be true
 ```
 
 #### Destructuring Assignment of Arrays
@@ -574,6 +601,9 @@ const hello4 = new Function("name", 'console.log("Hello)');
 ```javascript
 let arrayFunction = "Put your code here";
 
+let arrayFunction = (num1, num2, num3) =>
+  num1 * num1 + num2 * num2 + num3 * num3;
+
 arrayFunction(2, 3, 4); // Expected Result: 29
 ```
 
@@ -582,6 +612,8 @@ arrayFunction(2, 3, 4); // Expected Result: 29
 1. Functions that take functions as arguments.
 
 2. Functions that return a value.
+
+#### Functions that return a function
 
 ```javascript
 // This is a higher-order function
@@ -592,17 +624,13 @@ const makeHelloPlayer = (name) => {
 };
 ```
 
-#### Functions that take functions as arguments
+#### Functions that return a value
 
 ```javascript
 const aArray = [1, 2, 3, 4];
 
 const double = (aArray) => aArray.map((x) => x * 2 + 3); // Multiply the values ​​of all elements in array by 2 and then add 3
-```
 
-#### Functions that return a value
-
-```javascript
 const input = [1, 2, 3, 4];
 
 const trible = (aArray) => aArray.map((x) => x * 3 + 1);
@@ -617,22 +645,25 @@ multiplyBy6(aArray); // [4,7,10,13]
 > Try it yourself
 
 ```javascript
-
 // Define a symbol (*): a(*)b= a+a*b
 
-const customMultiply = (a,b)=>a+a*b;
+const customMultiply = (a, b) => a + a * b;
 
 // Define a symbol (+): a(+)b= 2*a+b
 
-const customAdd = (a,b)=>2*a+b;
+const customAdd = (a, b) => 2 * a + b;
 
 // Declare a higher-order function that accepts (*) and (+) computation functions to compute a(*)b(+)b
 
-const createMultiplyAndAdd = 'PUT YOUR CODE HERE';
+const createMultiplyAndAdd = (a, b) => (funcMultiply, funcAdd) => {
+  const step1 = funcMultiply(a, b);
 
-const customMultiplyAndAdd = createMultiplyAndAdd(customMultiply, `customAdd);`
-`customMultiplyAndAdd(2,3); // 2(*)3(+)3 = 8(+)3 = 19`
+  return funcAdd(step1, b);
+};
 
+const inputNumbers = createMultiplyAndAdd(2, 3);
+
+const finalResult = inputNumbers(customMultiply, customAdd); // 2(*)3(+)3 = 8(+)3 = 19
 ```
 
 #### Rest Parameter
@@ -641,14 +672,12 @@ const customMultiplyAndAdd = createMultiplyAndAdd(customMultiply, `customAdd);`
 
 > Restoration parameters can be destructured.
 
-``javascript`
-`function foo(a, b, ...rest) {`
-
-return rest;`
-
+```javascript
+function foo(a, b, ...rest) {
+  return rest;
 }
-`foo(1, 2, 3, 4, 5); // [3, 4, 5]`
 
+foo(1, 2, 3, 4, 5); // [3, 4, 5]`
 ```
 
 #### Rest Parameter and Arguments
@@ -659,17 +688,15 @@ return rest;`
 
 #### Spread Operator
 
->The spread operator is also `...`, which converts an array into a comma-separated sequence of arguments.
+> The spread operator is also `...`, which converts an array into a comma-separated sequence of arguments.
 
-``javascript`
-`function foo(a, ...rest)` {
-console.log(rest); // [2, 3]
-
+```javascript
+function foo(a, ...rest) {
+  console.log(rest); // [2, 3]
 }
-const b = [1,2,3];
+const b = [1, 2, 3];
 
-foo(...b) // 2, 3
-
+foo(...b); // [2, 3]
 ```
 
 #### Closures
@@ -693,7 +720,7 @@ function bar() {
   foo();
 }
 
-bar();
+bar(); // 1
 ```
 
 ##### 2. Global Scope and Scope Chain
