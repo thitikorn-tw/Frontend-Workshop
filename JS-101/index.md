@@ -444,5 +444,344 @@ const name = person.name;
 > Try it yourself
 
 ```javascript
-const book = {author: {name:'Davi
+const book = { author: { name: "David", gender: "male" } };
+
+// Please use ES6 format to retrieve the values ​​of name and gender in one line of code
+```
+
+### Objects are a reference type
+
+> Try it yourself
+
+```javascript
+let aaaa = 4;
+
+let bbbb = aaaa;
+
+aaaa = 5;
+
+bbbb = ?;
+
+let objectA = {name: 'Alice'};
+
+let objectB = objectA;
+
+objectB.name = 'Tom';
+
+objectA.name = ?
+
+```
+
+### Object destructuring assignment
+
+Destructuring assignment syntax is a JavaScript expression that allows values ​​from arrays or properties of objects to be extracted into different variables.
+
+```javascript
+
+let a, b;
+
+{a, b} = {b: 1, a: 2};
+
+console.log(a); // 2
+
+console.log(b); // 1
+
+```
+
+### Array
+
+Arrays are very important objects.
+
+```javascript` ...`javascript`
+`````````````````````````````"1"1"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""" `javascript
+const aArray = [1,2,3,4];
+
+aArray[1]; // 2
+
+````
+> Try it yourself
+
+```javascript
+let aArray = [1,2,3,4];
+
+typeof aArray; // ?
+
+````
+
+#### Some commonly used properties of Array
+
+length,
+Modify elements: push(), pop(), sort(), reverse(), concat()
+
+Element iteration: every(), filter(), map(), some()
+
+Detect array: Array.isArray()
+
+> Try it yourself
+
+```javascript
+
+// Provide an array a = [1,4,5,2,6], take out the odd numbers in the array to generate a new array [1,5], then multiply each element of the array by 2, finally get [2,10]
+
+// You will need to use the filter() and map() functions
+
+let arrayInput = [1,4,5,2,6];
+
+// Add your code
+
+let expectedResult = ; //Should be [2,10]
+
+```
+
+#### Destructuring Assignment of Arrays
+
+```javascript
+let a, b;
+
+[a, b] = [1, 2];
+
+console.log(a); // 1
+
+console.log(b); // 2
+```
+
+## Functions
+
+In JavaScript, a function is an object, making it a first-class citizen in the JavaScript world.
+
+```javascript
+((a) => a) instanceof Object; // true
+```
+
+### Creating a Function
+
+```javascript
+function hello(name) {
+  console.log(`Hello, ${name}!`);
+} // Function declaration
+
+const hello2 = function (name) {
+  console.log(`Hello, ${name}!`);
+}; // Function expression
+
+const hello3 = (name) => console.log(`Hello, ${name}!`);
+
+const hello4 = new Function("name", 'console.log("Hello)');
+```
+
+> Create a function using arrow functions that accept three arguments and print the sum of the squares of those three arguments: e.g., (1,2,3)=>1+4+9=14
+
+```javascript
+let arrayFunction = "Put your code here";
+
+arrayFunction(2, 3, 4); // Expected Result: 29
+```
+
+### Advanced Functions
+
+1. Functions that take functions as arguments.
+
+2. Functions that return a value.
+
+```javascript
+// This is a higher-order function
+const makeHelloPlayer = (name) => {
+  const text = `Hello, ${name}`;
+
+  return () => console.log(text);
+};
+```
+
+#### Functions that take functions as arguments
+
+```javascript
+const aArray = [1, 2, 3, 4];
+
+const double = (aArray) => aArray.map((x) => x * 2 + 3); // Multiply the values ​​of all elements in array by 2 and then add 3
+```
+
+#### Functions that return a value
+
+```javascript
+const input = [1, 2, 3, 4];
+
+const trible = (aArray) => aArray.map((x) => x * 3 + 1);
+
+const multiplyBy = (number) => (aArray) => aArray.map((x) => x * number + 1);
+
+const multiplyBy6 = multiplyBy(6);
+
+multiplyBy6(aArray); // [4,7,10,13]
+```
+
+> Try it yourself
+
+```javascript
+
+// Define a symbol (*): a(*)b= a+a*b
+
+const customMultiply = (a,b)=>a+a*b;
+
+// Define a symbol (+): a(+)b= 2*a+b
+
+const customAdd = (a,b)=>2*a+b;
+
+// Declare a higher-order function that accepts (*) and (+) computation functions to compute a(*)b(+)b
+
+const createMultiplyAndAdd = 'PUT YOUR CODE HERE';
+
+const customMultiplyAndAdd = createMultiplyAndAdd(customMultiply, `customAdd);`
+`customMultiplyAndAdd(2,3); // 2(*)3(+)3 = 8(+)3 = 19`
+
+```
+
+#### Rest Parameter
+
+> Used as `...`, the rest parameter syntax allows us to represent an array of indefinite numbers of arguments.
+
+> Restoration parameters can be destructured.
+
+``javascript`
+`function foo(a, b, ...rest) {`
+
+return rest;`
+
+}
+`foo(1, 2, 3, 4, 5); // [3, 4, 5]`
+
+```
+
+#### Rest Parameter and Arguments
+
+- rest: Contains only arguments that do not have corresponding formal parameters; an array instance.
+
+- arguments: Contains all arguments passed to the function; an array-like object.
+
+#### Spread Operator
+
+>The spread operator is also `...`, which converts an array into a comma-separated sequence of arguments.
+
+``javascript`
+`function foo(a, ...rest)` {
+console.log(rest); // [2, 3]
+
+}
+const b = [1,2,3];
+
+foo(...b) // 2, 3
+
+```
+
+#### Closures
+
+##### 1. Scope
+
+- Lexical Scope: Function scope is determined **at function definition** (static scope)
+
+- Dynamic Scope: Function scope is determined **at function execution**
+
+```javascript
+let value = 1;
+
+function foo() {
+  console.log(value);
+}
+
+function bar() {
+  let value = 2;
+
+  foo();
+}
+
+bar();
+```
+
+##### 2. Global Scope and Scope Chain
+
+- Global Scope
+
+All JS runtime environments must implicitly create a global scope object.
+
+> The JS runtime environment assigns a variable a value according to the following algorithm:
+
+> 1. Find the current scope
+
+> 2. If not found, search the outer scope directly.
+
+> 3. If found, proceed to step 6.
+
+> 4. If not found, repeat steps 2 and 3 until the global scope is reached.
+
+> 5. If not found in the global scope, create it in the global scope (non-strict mode).
+
+> 6. Assign a value.
+
+Note: When a variable is assigned a value directly without using `var` or `let`, it is defined as a global variable (non-strict mode).
+
+- Scope Chain
+
+- Scopes can be nested.
+
+- Each nested inner scope can access variables in the outer scope.
+
+- From the innermost to the outermost scope, a scope chain is formed.
+
+##### 3. Closures
+
+> A closure is a combination of a function and the lexical environment in which it is declared.
+
+> A closure is a function that has access to variables in the scope of another function.
+
+```javascript
+function init() {
+  var name = "Mozilla";
+
+  function displayName() {
+    console.log(name);
+  }
+
+  displayName();
+}
+init();
+```
+
+Note: Creating closures within loops
+
+```javascript
+function foo() {
+  for (var i = 0; i < 5; ++i) {
+    setTimeout(function () {
+      console.log(i);
+    }, 100);
+  }
+}
+```
+
+```javascript
+function foo() {
+  for (let i = 0; i < 5; ++i) {
+    setTimeout(function () {
+      console.log(i);
+    }, 100);
+  }
+}
+```
+
+## JS Collection Operations
+
+> https://github.com/YaoDanping-TW/js-collection
+
+## Recommended Reading
+
+- 《JavaScript: The Good Parts》
+
+- <a href="http://es6.ruanyifeng.com/">ECMAScript 6 Introduction--Ruan Yifeng</a>
+
+- <a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScriptt">MDN official Javascript tutorial</a>
+- <a href="devdocs.io">DevDocs</a>
+- <a href="https://lodash.com/">Lodash</a>
+- <a href="https://github.com/Chalarangelo/30-seconds-of-code">Learn Javascript with small code snippet</a>
+
+```
+
 ```
