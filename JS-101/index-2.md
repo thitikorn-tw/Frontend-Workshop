@@ -1,147 +1,168 @@
-## 浏览器
-> 浏览器的功能是从服务器上取回你想要的资源，然后展示在浏览器窗口当中。资源通常是 HTML 文件，也可能是 PDF，图片，或者其他类型的内容。资源的位置通过用户提供的 URI(Uniform Resource Identifier) 来确定。
+## Browser
 
+The function of a browser is to retrieve the resources you want from the server and then display them in the browser window. Resources are usually HTML files, but could also be PDFs, images, or other types of content. The location of a resource is determined by the URI (Uniform Resource Identifier) ​​provided by the user.
 
-### 渲染流程
+### Rendering Process
 
-以webkit为例：
+Taking WebKit as an example:
 
 ![](./webkitflow.png)
 
-1. 解析HTML为DOM，解析CSS为CSSOM（CSS Object Model）
-2. 将DOM和CSSOM合成一棵渲染树（Render Tree）
-3. 完成渲染树的布局（Layout）
-4. 将渲染树绘制到屏幕
+1. Parse HTML into the DOM, parse CSS into CSSOM (CSS Object Model)
 
-### 嵌入Javascript
+2. Combine the DOM and CSSOM into a render tree
 
-#### 直接添加代码块
-通过script标签，直接将JavaScript代码嵌入网页。
+3. Complete the layout of the render tree
+
+4. Draw the render tree onto the screen
+
+### Embedding JavaScript
+
+#### Adding Code Blocks Directly JavaScript code can be directly embedded into a webpage using the `<script>` tag.
 
 ```javascript
-<script>
-// write javascript code
-</script>
+<script>// write javascript code</script>
 ```
 
-#### 加载外部脚本
+#### Loading External Scripts
 
 ```
 <script src="index.js"></script>
+
 ```
 
-#### Javascript的装载执行
-正常的网页加载流程:
+#### Javascript Loading and Execution
 
-1. 浏览器一边下载HTML网页，一边开始解析
-2. 解析过程中，发现script标签
-3. 暂停解析，网页渲染的控制权转交给JavaScript引擎
-4. 如果script标签引用了外部脚本，就下载该脚本，否则就直接执行
-5. 执行完毕，控制权交还渲染引擎，恢复往下解析HTML网页
+Normal Web Page Loading Process:
+
+1. The browser downloads and parses the HTML web page simultaneously.
+
+2. During parsing, a script tag is encountered.
+
+3. Parsing is paused, and control of web page rendering is transferred to the JavaScript engine.
+
+4. If the script tag references an external script, the script is downloaded; otherwise, it is executed directly.
+
+5. After execution, control is returned to the rendering engine, and parsing of the HTML web page resumes.
 
 - defer
 
 ```
 <script src="index.js" defer></script>
+
 ```
 
 - async
 
 ```
 <script src="index.js" async></script>
+
 ```
+
 [Javascript defer vs async](http://www.growingwiththeweb.com/2014/02/async-vs-defer-attributes.html)
 
-## DOM(文档对象模型)
+## DOM (Document Object Model)
 
->DOM（文档对象模型）是针对HTML和XML文档的一个API。DOM 描绘了一个层次化的节点树，允许开发人员添加、删除、修改页面的某一部分。
+> The DOM (Document Object Model) is an API for HTML and XML documents. The DOM depicts a hierarchical tree of nodes, allowing developers to add, delete, and modify parts of a page.
 
-- 浏览器会根据 DOM 模型，将结构化文档（比如 HTML 和 XML）解析成一系列的节点，再由这些节点组成一个树状结构（DOM Tree）
-- 文档中的每个元素都是文档所属的文档对象模型(DOM)一部分，JavaScript可以访问和操作存储在DOM中的内容。
-- DOM是一个规范，与编程语言无关。
+- Browsers parse structured documents (such as HTML and XML) into a series of nodes based on the DOM model, and these nodes are then arranged into a tree structure (DOM Tree).
 
-### 节点（Node）
->DOM 的最小组成单位叫做节点。文档的树形结构(DOM树)，就是由各种不同类型的节点组成。
+- Every element in a document is part of the Document Object Model (DOM) to which the document belongs. JavaScript can access and manipulate content stored in the DOM.
 
-#### 节点的类型有12种：
-- `Document`：整个文档树的顶层节点
-- `Element`：网页的各种HTML标签（比如`<body>`等）
-- `Attribute`：网页元素的属性
-- `Text`：标签之间或标签包含的文本
+- The DOM is a specification, independent of programming languages.
+
+### Node
+
+> The smallest unit of the DOM is called a node. The tree structure of a document (DOM tree) is composed of various types of nodes.
+
+There are 12 types of nodes:
+
+- `Document`: The top-level node of the entire document tree
+
+- `Element`: Various HTML tags of a webpage (such as `<body>`, etc.)
+
+- `Attribute`: The attributes of webpage elements
+
+- `Text`: The text between or contained within tags
+
 - ......
 
 ```html
 <!DOCTYPE html>
 <html>
-	<head>
-		<title>Page Title</title>
-	</head>
-	<body>
-		<h1 class="heading">This is a Heading</h1>
-		<p>This is a paragraph.</p>
-	</body>
+  <head>
+    <title>Page Title</title>
+  </head>
+  <body>
+    <h1 class="heading">This is a Heading</h1>
+    <p>This is a paragraph.</p>
+  </body>
 </html>
 ```
 
-所有DOM节点类型都继承自浏览器提供的原生Node对象，因而它们拥有一些共同的属性和方法。
+All DOM node types inherit from the browser's native Node object, thus sharing some common properties and methods.
 
-### window对象
-> 在浏览器中，window对象指当前的浏览器窗口。它也是所有对象的顶层对象。
-> “顶层对象”指的是最高一层的对象，所有其他对象都是它的下属。JavaScript规定，浏览器环境的所有全局变量，都是window对象的属性。
+### window object
 
+> In a browser, the window object refers to the current browser window. It is also the top-level object of all objects.
 
-#### 常用属性及方法
+> "Top-level object" refers to the highest-level object; all other objects are its subordinates. JavaScript stipulates that all global variables of the browser environment are properties of the window object.
 
-**window.location** -- 获取当前窗口的URL信息
+#### Common Properties and Methods
 
-**window.innerHeight / window.innerWidth** -- 返回网页在当前窗口中可见部分的高度/宽度
+**window.location** -- Gets the URL information of the current window.
 
-**window.outerHeight / window.outerWidth** -- 返回浏览器窗口的高度和宽度
+**window.innerHeight / window.innerWidth** -- Returns the height/width of the visible portion of the webpage within the current window.
 
-**window.screen** -- 返回显示设备的信息
+**window.outerHeight / window.outerWidth** -- Returns the height and width of the browser window.
 
-**window.onload** -- 指定在浏览器窗口加载完毕时调用的函数
+**window.screen** -- Returns information about the display device.
+
+**window.onload** -- Specifies a function to be called when the browser window finishes loading.
 
 ```javascript
-window.onload = function() {
-  console.log('Load done!');
+window.onload = function () {
+  console.log("Load done!");
 };
 ```
 
-### document对象
->document对象是文档的根节点，每张网页都有自己的document对象。
-通过document 或 window.document 获取该对象。
+### document object
 
-#### 常用属性及方法
+> The document object is the root node of the document. Each webpage has its own document object.
 
-**document.cookie** -- 用来操作浏览器 Cookie
+> Obtain this object through document or window.document.
 
-**document.createElement(name)** --  用来生成元素节点，并返回该节点。
+#### Common Properties and Methods
 
-**document.getElementsByTagName(name)** --  搜索HTML标签名，返回符合条件的元素
+**document.cookie** -- Used to manipulate browser cookies.
 
-**document.getElementsByClassName(name)** --  返回包括了所有class名字符合指定条件的元素
+**document.createElement(name)** -- Used to create an element node and return that node.
 
-**document.getElementById(id)** --  返回匹配指定id属性的元素节点
+**document.getElementsByTagName(name)** -- Searches for HTML tag names and returns elements that match the specified criteria.
 
-**document.querySelector(selector)** --  接受一个CSS选择器作为参数，返回匹配该选择器的元素节点
+**document.getElementsByClassName(name)** -- Returns all elements whose class names match the specified criteria.
 
-**document.querySelectorAll(selector)** -- 与querySelector类似，区别是返回一个包含所有匹配给定选择器的节点集合。
+**document.getElementById(id)** -- Returns the element node that matches the specified id attribute.
 
-> 练习：打开NGBE，在Flight页面找到 `id=submit_button` 的元素
+**document.querySelector(selector)** -- Accepts a CSS selector as an argument and returns the element nodes that match that selector.
 
-### Element（元素）
->Element对象对应网页的 HTML 元素。每一个 HTML 元素，在 DOM 树上都会转化成一个Element节点对象
+**document.querySelectorAll(selector)** -- Similar to querySelector, but returns a collection of all nodes that match the given selector.
 
-#### 常用属性及方法
+> Exercise: Open NGBE and find the element with `id=submit_button` on the Flight page.
+
+### Element
+
+> The Element object corresponds to the HTML element of the webpage. Every HTML element is converted into an Element node object in the DOM tree.
+
+#### Common Properties and Methods
 
 **Element.id**
 
 **Element.tagName**
 
-**Element.innerHTML** -- 返回该元素包含的HTML代码
+**Element.innerHTML** -- Returns the HTML code contained within this element.
 
-**Element.outerHTML** -- 返回指定元素节点的所有HTML代码，包含自身及子元素
+**Element.outerHTML** -- Returns the HTML code of the specified element node, including itself and its child elements.
 
 **Element.querySelector()**
 
@@ -151,112 +172,140 @@ window.onload = function() {
 
 **Element.getElementsByClassName()**
 
-**Element.append()** -- 在当前元素内部插入一个节点
+**Element.append()** -- Inserts a node inside the current element.
 
-**Element.remove()** -- 将当前元素节点从DOM树删除。
+**Element.remove()** -- Removes the current element node from the DOM tree.
 
+Exercise: Open NGBE and delete the element with `id=submit_button` on the Flight page.
 
-> 练习：打开NGBE，在Flight页面删掉 `id=submit_button` 的元素
+### Event
 
-### Event（事件）
+#### Event Types
 
-#### 事件种类
+- Mouse, keyboard, form, drag and drop, document events...
 
-- 鼠标、键盘、表单、拖拉、文档事件......
+#### How to Bind an Event
 
-#### 如何绑定一个事件
+- Binding in HTML code
 
-- 在HTML代码中绑定
+```html
+<button onclick="func()"></button>
+```
 
-	```html
-	<button onclick="func()"></button>
-	```
-- 通过JS绑定
-	- addEventListener(eventType, handler, useCapture)： 绑定监听函数
-	- removeEventListener(eventType, handler, useCapture)：移除监听函数
+- Binding via JS
 
-	```javascript
-	const elem = document.getElementById('hello');
-	
-	elem.addEventListener('click', () => {
-		console.log('Hello');
-	});
-	```
+- addEventListener(eventType, handler, useCapture): Binds a listener function
 
-	[小小小小小练习](https://codepen.io/anlihuer/pen/bvaxBv?editors=1010)
-	
-#### 事件冒泡
-当事件触发后，事件流从目标节点开始，逐层向上冒泡直至根节点
+- removeEventListener(eventType, handler, useCapture): Removes a listener function
 
-[小小小小小小🌰](https://codepen.io/anlihuer/pen/GxQMYz?editors=1011)
+```javascript
+const elem = document.getElementById("hello");
 
+elem.addEventListener("click", () => {
+  console.log("Hello");
+});
+```
 
-#### 事件捕获
-当事件触发后，事件流从根节点开始，逐层向下至目标节点。
+[Mini-Exercise](https://codepen.io/anlihuer/pen/bvaxBv?editors=1010)
 
-[小小小小小小🌰](https://codepen.io/anlihuer/pen/eMVGxv)
+#### Event Bubbling
 
+When an event is triggered, the event flow starts from the target node and bubbles upwards layer by layer until it reaches the root node.
 
-#### 事件代理(Event Delegation)
-> 通过对目标元素的父级元素绑定相关事件，当对目标元素进行操作时，事件流冒泡至绑定事件的父元素上，通过对事件target元素的判断（e.target），来间接性（暂且这样理解）的为目标元素绑定事件。
+[Mini-Funny🌰](https://codepen.io/anlihuer/pen/GxQMYz?editors=1011)
 
-事件代理的作用：当目标元素（可能是一组元素）不断的添加删除时，所有的目标元素都可以成功绑定事件，而无需在每次新添加目标元素是都要为其重新绑定事件。
+#### Event Capturing
 
-[小小小小小小🌰](https://codepen.io/anlihuer/pen/OvzwzR?editors=1111)
+When an event is triggered, the event flow starts from the root node and bubbles downwards layer by layer until it reaches the target node.
 
-<!--#### 事件循环（Event Loop）
-	同一个DOM上绑定两个事件，order?-->
+[Little Little Little Little 🌰](https://codepen.io/anlihuer/pen/eMVGxv)
+
+#### Event Delegation
+
+> By binding relevant events to the parent element of the target element, when an operation is performed on the target element, the event stream bubbles up to the parent element to which the event was bound. By checking the event's target element (e.target), the event is indirectly (for now, let's understand it this way) bound to the target element.
+
+The purpose of event delegation: When target elements (which may be a group of elements) are continuously added or deleted, all target elements can successfully bind events without needing to re-bind events for each newly added target element.
+
+[小小小小小🌰](https://codepen.io/anlihuer/pen/OvzwzR?editors=1111)
+
+<!--#### Event Loop
+
+Bound two events to the same DOM element, order?-->
 
 <!--
 #### Some Tips
 
 ##### Event.preventDefault()
->如果一个事件没有得到明确的处理，则该事件的默认行为会被阻止。但该事件还会继续冒泡，除非他的某一事件监听器调用`stopPropagation()`或者 `stopImmediatePropagation()`。此外，如果事件的属性`cancelable=false`,则表明该事件没有默认行为，调用该方法无任何作用。
 
-对事件的默认行为的理解:
+If an event is not explicitly handled, its default behavior is prevented. However, the event will continue to bubble unless one of its event listeners calls `stopPropagation()` or `stopImmediatePropagation()`. Furthermore, if the event's property `cancelable=false`, it indicates that the event has no default behavior, and calling this method will have no effect.
 
-- 🌰
-	一个`type=“submit”`的`button`元素,当触发click事件时，会自动提交表单。
-	
-	```html
-	<button id='btn' type='submit'></button>
-	```
-	
-	```javascript
-	document.getElementById('btn').onclick = function(e) {
-	    e.preventDefault();
-	});
-	```
-	使用preventDefault可以阻止表单自动提交
+Understanding the default behavior of events:
 
 - 🌰
-	一个`<a></a>`，为其设置Attribut`src='***'`后，当用户点击链接，当前页面会自动跳转至指定页面。现在有一个需求：希望用户点击链接是打开一个新的页面，而非在当前页面跳转
-	
-	```html
-	<a id='link' src="www.google.com"></a>
-	```
-	
-	```javascript
-    document.getElementById('link').onclick = function(e) {
-        e.preventDefault();
-	
-        window.open(this.href);
-    });
-	```
+	A `button` element with `type="submit"` will automatically submit the form when its click event is triggered.
+
+``html
+
+<button id='btn' type='submit'></button>
+
+```
+
+``javascript
+
+document.getElementById('btn').onclick = function(e) {
+
+e.preventDefault();
+
+});
+
+```
+Using `preventDefault` can prevent the form from automatically submitting.
+
+- 🌰
+	A `<a></a>` element, with its attribute `src='***'`, automatically redirects to the specified page when a user clicks the link. Now, there's a requirement: the user clicking the link should open a new page, not redirect within the current page.
+
+``html
+
+<a id='link' src="www.google.com"></a>
+
+```
+
+``javascript
+
+document.getElementById('link').onclick = function(e) {
+
+e.preventDefault();
+
+window.open(this.href);
+
+});
+
+```
 
 ##### Event.stopPropagation()
-> 阻止事件冒泡
+
+> Prevents event bubbling
 
 ##### return false
+
 - event.preventDefault()
+
 - event.stopPropagation()
-- 跳出当前函数、循环，不在执行之后的逻辑代码。
-	-->
-	
+
+- Exits the current function/loop, preventing execution of subsequent logic.
+
+-->
+
 ## Debug
-## Recommend
+
+## Recommendation
+
 1. [How browsers work](http://taligarsiel.com/Projects/howbrowserswork1.htm)
-   [中文版](https://www.html5rocks.com/zh/tutorials/internals/howbrowserswork)
-2. [浏览器渲染原理简介](https://coolshell.cn/articles/9666.html)
-3. [DOM 模型概述](http://javascript.ruanyifeng.com/dom/node.html)
+
+[Chinese version](https://www.html5rocks.com/zh/tutorials/internals/howbrowserswork)
+
+2. [Introduction to browser rendering principles](https://coolshell.cn/articles/9666.html)
+
+3. [Overview of the DOM model](http://javascript.ruanyifeng.com/dom/node.html)
+
 4. [Javascript defer vs async](http://www.growingwiththeweb.com/2014/02/async-vs-defer-attributes.html)
