@@ -45,8 +45,8 @@ const element = <h1>Hello, world!</h1>;`
 
 The core idea of ​​React is to integrate all the logic and UI parts, packaging them into independent components with complete functionality. React itself doesn't require the use of JSX syntax, but the concepts of JSX and React are surprisingly compatible.
 
-```
-js const element = <h1>Hello, world!</h1>;`
+```js
+const element = <h1>Hello, world!</h1>;`
 
 ```
 
@@ -86,8 +86,7 @@ The core idea of ​​React is to integrate all the logic and UI parts, packagi
 
 ### Basic Syntax
 
-```
-js
+```js
 const element = <div tabIndex="0"></div>;
 
 //Use double quotes to represent strings
@@ -109,8 +108,7 @@ const tabItem = <span tabIndex="1" />;
 
 The JSX syntax we commonly use is actually transpiled by Babel into the following code.
 
-```
-js
+```js
 const element = <h1 className="greeting">Hello, world!</h1>;
 
 //babeled
@@ -142,8 +140,7 @@ React uses this Object to construct the DOM and keep the DOM updated.
 
 We've mentioned React elements before, but we'll hear more often about React components. In fact, React elements are the smallest building blocks of React components.
 
-``js` ``js
-
+````js
 // A React element is also a unit of React component.
 
 const foo = <h1>Hello, world</h1>;
@@ -151,23 +148,20 @@ const foo = <h1>Hello, world</h1>;
 // React component
 
 const Bar = () => (
-
-<div>
-<Foo />
-<Foo />
-</div>
-
+    <div>
+        <Foo />
+        <Foo />
+    </div>
 );
 
 // Naming convention: React components must start with a capital letter and be named in camelCase.
-
-`````
+``` js
 
 ### Component Mounting
 
 How are React components actually mounted on our actual browser DOM?
 
-```
+````
 
 // index.html
 
@@ -175,18 +169,12 @@ How are React components actually mounted on our actual browser DOM?
 
 <div id="root"></div>
 
-```
-
-``js
-
+```js
 const Component = <h1>Hello, world</h1>;
-
-s;
 
 // Mount our component to the corresponding node
 
 ReactDOM.render(Component, document.getElementById("root"));
-
 ```
 
 ### Component Updates
@@ -197,7 +185,7 @@ As mentioned when discussing React elements, for React, our JSX syntax is ultima
 
 ##### What are Props?
 
-````![Props](http://qlt.com/images/detailed/1/new-props.png)
+```js ![Props](http://qlt.com/images/detailed/1/new-props.png)
 
 Components are puppets; the puppet's decoration and behavior are determined by Props.
 
@@ -207,47 +195,46 @@ Components are puppets; the puppet's decoration and behavior are determined by P
 
 #### functional component
 
-``` const Hello = props => <p>Hello, my world. {JSON.stringify(props)}</p>;
+const Hello = props => <p>Hello, my world. {JSON.stringify(props)}</p>;
 
 render(<Hello a="1" b={Date.now()} />, document.querySelector('#app'));
 
-`````
+```
 
 #### class component
 
 [class property](https://babeljs.io/repl/#?babili=false&browsers=&build=&builtIns=false&code_lz=ATDGBsEMGduAhA9gJwNbA N4CgQgPR4AKyiADgKbIAuAnsAJYB29V9k49AXpcNDY1UgAPHLibRBjUOWJlKtYAF5gAIgBGKVCoDcokBoCujACYAxI6FaJGS4AAoAlEoB8mPbmTk qB5DaoALemgAOnFJaVkKahpdXGAAX3d3CBhoAFkvf0RjRzc4kFBraERwcmDwRABzOwCggBpgAHIAM0RERodY3ET3AgBlQVZQMChYYFISKNZyaHc JSCHeQfpQSPk6ZXVINXJwAEloAGE28B055eH5ofMpKxtlZos73Ox84E9vXwRNYKuVteiXRAiWBWFEpSowAAtjQkGhbIxyAB3b5oXSiAgAhRMFhsD jcZBwSCeYCMRCQ6zAALkcYkKjkmgUYKiQqMYqlcpVOwwuGoYIAfX5E3JiEFwUMJhulno1k6wAIwFcRmM5GaTHIxjB-DwSGVwEetxlbOAxJpEuMV MQVP8NJSYzCkCkZRZRRKZQq1R5P3NURuwVA7HAdmVqvVxgccoVrnUmhUWvleAGCxW-qeRuA5CEQSocEp1JGqWZBVdHI9dl5vwuvqNjkjeEVqjU21 2B2OJTjQA&debug=false&forceAllTransforms=false&shippedProposals=false&circleciRepo=&evaluate=false&fileSize=false&lineWrap=true&presets=es2015%2Creact%2Cstage-0&prettier=false&targets=&version=6.26.0&envVersion=)
 
-```
-import React, { Component } from 'react';
-import { render } from 'react-dom';
+```js
+import React, { Component } from "react";
+import { render } from "react-dom";
 
 class Welcome extends Component {
-render() {
-return <p>Hello, welcome to my world. {JSON.stringify(this.props)}</p>;
-}
+    render() {
+        return <p>Hello, welcome to my world. {JSON.stringify(this.props)}</p>;
+    }
 }
 
-render(<Welcome a="1" b={Date.now()} />, document.querySelector('#app'));
+render(<Welcome a="1" b={Date.now()} />, document.querySelector("#app"));
 ```
 
 #### Composing Components
 
-```
+```js
 class Welcome extends Component {
-render() {
-return <p>Hello, welcome to my world. {JSON.stringify(this.props)}</p>;
-}
+    render() {
+        return <p>Hello, welcome to my world. {JSON.stringify(this.props)}</p>;
+    }
 }
 
 const WelcomeTheTeam = () => (
-<div>
-<Welcome name="zhangsan" />
-<Welcome name="lisi" />
-<Welcome name="wangmazi" /> </div>
-
+    <div>
+        <Welcome name="zhangsan" />
+        <Welcome name="lisi" />
+        <Welcome name="wangmazi" />{" "}
+    </div>
 );
-render(<WelcomeTheTeam />, document.querySelector('#app'));
-
+render(<WelcomeTheTeam />, document.querySelector("#app"));
 ```
 
 #### Updating Components Using State
@@ -260,43 +247,36 @@ Components acquire certain behaviors by receiving Props from their parent compon
 
 To become a component with state, a component must derive from React.Component
 
-```
+```js
 class Welcome extends Component {
-render() {
-return <p>Hello, welcome to my world. {Date.now()}</p>;
-
+    render() {
+        return <p>Hello, welcome to my world. {Date.now()}</p>;
+    }
 }
-}
-render(<Welcome />, document.querySelector('#app'));
-
+render(<Welcome />, document.querySelector("#app"));
 ```
 
 ##### Use state and setState to update UI (by clicking the button)
 
-`````
+```js
 class Welcome extends Component {
+    state = {
+        time: Date.now(),
+    };
 
-state = {
-
-time: Date.now(),
-
-};
-
-render() {
-
-return <p>
-
-Hello, welcome to my world. {this.state.time}
-
-<br/>
-
-<button onClick={() => this.setState({ time: Date.now() })}>update</button>
-
-</p>;
-
+    render() {
+        return (
+            <p>
+                Hello, welcome to my world. {this.state.time}
+                <br />
+                <button onClick={() => this.setState({ time: Date.now() })}>
+                    update
+                </button>
+            </p>
+        );
+    }
 }
-}
-``
+```
 
 props and state are actually updates to our React Object. By updating the React Object, React internally performs efficient browser DOM diff updates.
 
@@ -304,8 +284,7 @@ props and state are actually updates to our React Object. By updating the React 
 
 React events are very similar to native HTML events; all you need to do is declare the event handler function and bind the event.
 
-```
-js
+```js
 
 //Native HTML
 
@@ -331,12 +310,14 @@ Activate Lasers
 
 Once a React component is declared using ES6 classes, that component has a complete React lifecycle.
 
-````![](https://rangle.github.io/react-training/img/reactjs_component_lifecycle_functions.png)
+```js ![](https://rangle.github.io/react-training/img/reactjs_component_lifecycle_functions.png)
 [http://projects.wojtekmaj.pl/react-lifecycle-methods-diagram/](http://projects.wojtekmaj.pl/react-lifecycle-methods-diagram/)
 
 ##### automachine: use setinterval and lifecycle to update state
 
 ```
+
+````js
 class Welcome extends Component {
 state = {
 time: Date.now(),
@@ -352,12 +333,11 @@ Hello, welcome to my world. {parseInt(this.state.time / 1000)}
 </p>;
 }
 }
-```
 
 ## Conditional rendering
 
-```
 const LoggedIn = ({ name, onClick }) => (
+
 <p>
 Hi, {name}. you already logged in. want{' '}
 <button onClick={onClick}>Logout</button>
@@ -366,6 +346,7 @@ Hi, {name}. you already logged in. want{' '}
 );
 
 const LoggedOut = ({ onClick }) => (
+
 <p>
 Hi, come on <button onClick={onClick}>Login</button>
 </p>
@@ -401,7 +382,7 @@ return (
 
 }
 }
-``
+```
 
 ## Rendering Multiple Duplicate Elements
 
@@ -413,7 +394,6 @@ Each post is actually a reusable React component, only the content it contains i
 
 In this case, we can use an array of objects (each object contains the specific content of each post) to build our post list.
 
-```
 const apple = (
 <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEgAAABICAMAAABiM0N1AAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAACKUEx URUdwTGiYNm6MOmmaNXKZQG6VPI+yZ3idSHSUQYCjUmeXNHCePnJVKI6xZW2fOWRDG5CzZ1o4F1qGLGdDHn20P6zUf3K7JLHXhbfajr3emMPhocnkq6bQeG ibMoXEQXzAMo3HT3a3LpXKXJ3NaXaqQG6iOX6tUIm2WlqNL3q2N5zCcpPAZZS2alAxDkhhy0YAAAAUdFJOUwDLQ5Ua995eDTOyfPyq4fj2s+iCxMw9HQAAB G9JREFUWMPVmOlyokAUhcPaCCIacQ0YlWaR5f1fb+7tBRoFJDNTNTWXipU/fJ5zN2g/Pv77MBc6IWSxcP6I4uiGZrFYuR5nOb+FcT+LOE1pxsMHYcQwf84x EEMRk+d5na+z3LYzf86d281m0SXHLRROXlVVXWfZmszgbJqm2cgcOMABVwAKGamqygr+sWc404OmCZbyG72CpUcqAkEZzet6jrOP7RJCSNJZmhEUZiFay1 JaJbW9mJVdRtKFsThFEk9SSOM0A2+1P6/65gZAWyFIiRgxVVLl8wTh/egN02kIABcFWaqwark3u3dIsAzAm6kVhchR1pY/z/35zehsgmALrVgUsmi05WSzj WEsgmDjkOLTg+lg/QhdxKuW2fqPBmMbBEQryIcDn5hlOWiZ/16PYy4I8YjOxlsPgs9Cg+F0VzEzaLF0a+Rt4U3i2+t1Xa/Xto/zvWmCYrWiaXqL91C2GFaI 4elv0+wQGyBlWUbwBzTbtgAETi6X7+89RJrG1ozVsfDXdRntdrvDAT4ipGVBU1T3+/XKSbcHTWPtXZ51GzGHLpC2bKwoUUlhGq+mtwcBjsAcjy3KAhAjgTs GektaCM5RxgEtHupmCaAKJQlSCEO7GndnAkfFACcqYaTyYMnG4irMIQhI2mgf+UwPQ5xYHA9RCXunaJoipjAVd0USuHNHOomsBefUBiPRYrksYG0kCcu3B IWpNZwm068jhXOGC1HgryyrMopEvlnhGAjMmSOCWs5ZBkNhAVlTJT1vY5KEoB7nLFW1INUbjd3B0kOGuCAEfEEIElPESJilrm4gaTVQOFKXQpDkCJQgDYJi MuWsxTDSszeeJA6i8evOdvxaOFMEMUmDoJsAGUNdvWudqYq4t+FshwM92eW6B/qSHfBsjZct1cZAL4q+phVpf0vRlLXT/GSP5ujFW7+PdokE3R6jVZOgHqm bNgRFXUNO9BErf2/Wvs59DnY2G//9ZGdjQ+5mTH8fNDBrAIp26l47i4WkCnpaI+HgQvJgz8rFf1J2ZDf7QtB0rvmilaTT8YUTDQgaHH58FEUtSY2DMKZs2i lnbGXvOOnQx0jOs6BhZ5CknD3zVdShw0RJoj6z+coefkTqWR1x0tOzX+p5EeQOv5OYWp5IErDYJTEtpydo7OnvZUhqUZIywhl7qmHdVtk9Yaioz0n6HFn7 8Xdsg+ZAQhSDMS0S03LeC0JJ4fWOKM4SFMB0HGlsIkPshEiRxFkyBOaJQ0dfRYQkerkyFMDuyLhfJeaJY02/RHophbvghep6ZxeGgpEcyLTx5t3YjW8XjOt FQlpMp2c609JcfIMbL5zAKYIj647Tar0/hZA43n8rsZdqFM5UCylpAhKLlvGEwZfHOcc0x5CkYQxwtHnHtD7phhQFE844PrQkcJfeWDwefcqPOJjxFZzvHi Fe/aCzfckl51qAwjsplQyIeQesJ3sanszxnBennIFHPpf8/Nci03M1zTXg0+IMw5txbBxhmfj9pk4MwyB/9kvYP4lfovMdXV5nBr8AAAAASUVORK5CYII=" />
 );
@@ -450,8 +430,6 @@ React is a unidirectional data flow, so filling out forms in React is a cumberso
 
 ![](https://image.slidesharecdn.com/react-150410184943-conversion-gate01/95/react-52-638.jpg?cb=1428692033)
 
-```
-js
 class TodoMvc extends Component {
 state = {
 todos: [],
@@ -467,6 +445,7 @@ handleChange = (e) => this.setState({ newItem: e.target.value });
 
 render() {
 return (
+
 <form onSubmit={this.handleSubmit}>
 <header className="header">
 <h1>todos</h1>
@@ -478,6 +457,7 @@ autofocus onChange={this.handleChange}
 value={this.state.newItem}
 
 />
+
 </header>
 
 </form>
@@ -518,4 +498,5 @@ HTML template: `src/index.html`
 #Futherreading
 
 https://medium.com/shoutem/react-to-bind-or-not-to-bind-7bf58327e22a
-`````
+```
+````
