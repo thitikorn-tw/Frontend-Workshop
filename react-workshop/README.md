@@ -14,7 +14,8 @@ The page will reload if you make edits.<br> You will also see any lint errors in
 
 ## Hello React
 
-```javascript
+```
+javascript
 render(<p>hello, world</p>, document.querySelector("#app"));
 ```
 
@@ -24,9 +25,11 @@ render(<p>hello, world</p>, document.querySelector("#app"));
 
 JSX is an extension of JavaScript syntax. Using JSX, you can effectively describe UI elements within JavaScript.
 
-```js const element = <h1>Hello, world!</h1>;`
+```
+js const element = <h1>Hello, world!</h1>;`
 
-````
+```
+
 ### Why Choose JSX
 
 - Stone Age
@@ -43,9 +46,10 @@ JSX is an extension of JavaScript syntax. Using JSX, you can effectively describ
 
 The core idea of ​​React is to integrate all the logic and UI parts, packaging them into independent components with complete functionality. React itself doesn't require the use of JSX syntax, but the concepts of JSX and React are surprisingly compatible.
 
-```js const element = <h1>Hello, world!</h1>;`
+```
+js const element = <h1>Hello, world!</h1>;`
 
-````
+```
 
 ### Why Choose JSX
 
@@ -83,7 +87,8 @@ The core idea of ​​React is to integrate all the logic and UI parts, packagi
 
 ### Basic Syntax
 
-```js
+```
+js
 const element = <div tabIndex="0"></div>;
 
 //Use double quotes to represent strings
@@ -105,7 +110,8 @@ const tabItem = <span tabIndex="1" />;
 
 The JSX syntax we commonly use is actually transpiled by Babel into the following code.
 
-```js
+```
+js
 const element = <h1 className="greeting">Hello, world!</h1>;
 
 //babeled
@@ -162,7 +168,7 @@ const Bar = () => (
 
 How are React components actually mounted on our actual browser DOM?
 
-```` ```
+```
 
 // index.html
 
@@ -170,7 +176,7 @@ How are React components actually mounted on our actual browser DOM?
 
 <div id="root"></div>
 
-`````
+```
 
 ``js
 
@@ -182,7 +188,7 @@ s;
 
 ReactDOM.render(Component, document.getElementById("root"));
 
-`````
+```
 
 ### Component Updates
 
@@ -192,7 +198,7 @@ As mentioned when discussing React elements, for React, our JSX syntax is ultima
 
 ##### What are Props?
 
-```` ![Props](http://qlt.com/images/detailed/1/new-props.png)
+````![Props](http://qlt.com/images/detailed/1/new-props.png)
 
 Components are puppets; the puppet's decoration and behavior are determined by Props.
 
@@ -268,7 +274,7 @@ render(<Welcome />, document.querySelector('#app'));
 
 ##### Use state and setState to update UI (by clicking the button)
 
-````
+`````
 class Welcome extends Component {
 
 state = {
@@ -299,7 +305,8 @@ props and state are actually updates to our React Object. By updating the React 
 
 React events are very similar to native HTML events; all you need to do is declare the event handler function and bind the event.
 
-``` ```js
+```
+js
 
 //Native HTML
 
@@ -317,7 +324,7 @@ Activate Lasers
 
 </button>
 
-````
+```
 
 [Detailed introduction to React Events](https://reactjs.org/docs/events.html)
 
@@ -407,7 +414,8 @@ Each post is actually a reusable React component, only the content it contains i
 
 In this case, we can use an array of objects (each object contains the specific content of each post) to build our post list.
 
-```const apple = (
+```
+const apple = (
 <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEgAAABICAMAAABiM0N1AAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAACKUEx URUdwTGiYNm6MOmmaNXKZQG6VPI+yZ3idSHSUQYCjUmeXNHCePnJVKI6xZW2fOWRDG5CzZ1o4F1qGLGdDHn20P6zUf3K7JLHXhbfajr3emMPhocnkq6bQeG ibMoXEQXzAMo3HT3a3LpXKXJ3NaXaqQG6iOX6tUIm2WlqNL3q2N5zCcpPAZZS2alAxDkhhy0YAAAAUdFJOUwDLQ5Ua995eDTOyfPyq4fj2s+iCxMw9HQAAB G9JREFUWMPVmOlyokAUhcPaCCIacQ0YlWaR5f1fb+7tBRoFJDNTNTWXipU/fJ5zN2g/Pv77MBc6IWSxcP6I4uiGZrFYuR5nOb+FcT+LOE1pxsMHYcQwf84x EEMRk+d5na+z3LYzf86d281m0SXHLRROXlVVXWfZmszgbJqm2cgcOMABVwAKGamqygr+sWc404OmCZbyG72CpUcqAkEZzet6jrOP7RJCSNJZmhEUZiFay1 JaJbW9mJVdRtKFsThFEk9SSOM0A2+1P6/65gZAWyFIiRgxVVLl8wTh/egN02kIABcFWaqwark3u3dIsAzAm6kVhchR1pY/z/35zehsgmALrVgUsmi05WSzj WEsgmDjkOLTg+lg/QhdxKuW2fqPBmMbBEQryIcDn5hlOWiZ/16PYy4I8YjOxlsPgs9Cg+F0VzEzaLF0a+Rt4U3i2+t1Xa/Xto/zvWmCYrWiaXqL91C2GFaI 4elv0+wQGyBlWUbwBzTbtgAETi6X7+89RJrG1ozVsfDXdRntdrvDAT4ipGVBU1T3+/XKSbcHTWPtXZ51GzGHLpC2bKwoUUlhGq+mtwcBjsAcjy3KAhAjgTs GektaCM5RxgEtHupmCaAKJQlSCEO7GndnAkfFACcqYaTyYMnG4irMIQhI2mgf+UwPQ5xYHA9RCXunaJoipjAVd0USuHNHOomsBefUBiPRYrksYG0kCcu3B IWpNZwm068jhXOGC1HgryyrMopEvlnhGAjMmSOCWs5ZBkNhAVlTJT1vY5KEoB7nLFW1INUbjd3B0kOGuCAEfEEIElPESJilrm4gaTVQOFKXQpDkCJQgDYJi MuWsxTDSszeeJA6i8evOdvxaOFMEMUmDoJsAGUNdvWudqYq4t+FshwM92eW6B/qSHfBsjZct1cZAL4q+phVpf0vRlLXT/GSP5ujFW7+PdokE3R6jVZOgHqm bNgRFXUNO9BErf2/Wvs59DnY2G//9ZGdjQ+5mTH8fNDBrAIp26l47i4WkCnpaI+HgQvJgz8rFf1J2ZDf7QtB0rvmilaTT8YUTDQgaHH58FEUtSY2DMKZs2i lnbGXvOOnQx0jOs6BhZ5CknD3zVdShw0RJoj6z+coefkTqWR1x0tOzX+p5EeQOv5OYWp5IErDYJTEtpydo7OnvZUhqUZIywhl7qmHdVtk9Yaioz0n6HFn7 8Xdsg+ZAQhSDMS0S03LeC0JJ4fWOKM4SFMB0HGlsIkPshEiRxFkyBOaJQ0dfRYQkerkyFMDuyLhfJeaJY02/RHophbvghep6ZxeGgpEcyLTx5t3YjW8XjOt FQlpMp2c609JcfIMbL5zAKYIj647Tar0/hZA43n8rsZdqFM5UCylpAhKLlvGEwZfHOcc0x5CkYQxwtHnHtD7phhQFE844PrQkcJfeWDwefcqPOJjxFZzvHi Fe/aCzfckl51qAwjsplQyIeQesJ3sanszxnBennIFHPpf8/Nci03M1zTXg0+IMw5txbBxhmfj9pk4MwyB/9kvYP4lfovMdXV5nBr8AAAAASUVORK5CYII=" />
 );
 
@@ -443,7 +451,8 @@ React is a unidirectional data flow, so filling out forms in React is a cumberso
 
 ![](https://image.slidesharecdn.com/react-150410184943-conversion-gate01/95/react-52-638.jpg?cb=1428692033)
 
-```js
+```
+js
 class TodoMvc extends Component {
 state = {
 todos: [],
@@ -510,4 +519,4 @@ HTML template: `src/index.html`
 #Futherreading
 
 https://medium.com/shoutem/react-to-bind-or-not-to-bind-7bf58327e22a
-````
+`````
