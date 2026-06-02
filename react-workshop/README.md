@@ -153,9 +153,9 @@ const Bar = () => (
         <Foo />
     </div>
 );
-
+```
 // Naming convention: React components must start with a capital letter and be named in camelCase.
-``` js
+```js
 
 ### Component Mounting
 
@@ -317,70 +317,67 @@ Once a React component is declared using ES6 classes, that component has a compl
 
 ```
 
-````js
+```js
 class Welcome extends Component {
-state = {
-time: Date.now(),
-};
+    state = {
+        time: Date.now(),
+    };
 
-componentDidMount() {
-setInterval(() => this.setState({ time: Date.now() }), 1000);
-}
+    componentDidMount() {
+        setInterval(() => this.setState({ time: Date.now() }), 1000);
+    }
 
-render() {
-return <p>
-Hello, welcome to my world. {parseInt(this.state.time / 1000)}
-</p>;
+    render() {
+        return (
+            <p>
+                Hello, welcome to my world. {parseInt(this.state.time / 1000)}
+            </p>
+        );
+    }
 }
-}
+```
 
 ## Conditional rendering
 
+```js
 const LoggedIn = ({ name, onClick }) => (
-
-<p>
-Hi, {name}. you already logged in. want{' '}
-<button onClick={onClick}>Logout</button>
-?
-</p>
+    <p>
+        Hi, {name}. you already logged in. want{" "}
+        <button onClick={onClick}>Logout</button>?
+    </p>
 );
 
 const LoggedOut = ({ onClick }) => (
-
-<p>
-Hi, come on <button onClick={onClick}>Login</button>
-</p>
+    <p>
+        Hi, come on <button onClick={onClick}>Login</button>
+    </p>
 );
 
 class Welcome extends Component {
-state = {
-isLoggedIn: false,
-};
+    state = {
+        isLoggedIn: false,
+    };
 
-login = () => {
-this.setState({ isLoggedIn: true });
-};
+    login = () => {
+        this.setState({ isLoggedIn: true });
+    };
 
-logout = () => {
-this.setState({ isLoggedIn: false });
-};
+    logout = () => {
+        this.setState({ isLoggedIn: false });
+    };
 
-render() {
-return (
-<span>
-{this.state.isLoggedIn && 'yay... '} {this.state.isLoggedIn ? (
-<LoggedIn onClick={this.logout} />
-
-) : (
-<LoggedOut onClick={this.login} />
-
-)}
-
-</span>
-
-);
-
-}
+    render() {
+        return (
+            <span>
+                {this.state.isLoggedIn && "yay... "}{" "}
+                {this.state.isLoggedIn ? (
+                    <LoggedIn onClick={this.logout} />
+                ) : (
+                    <LoggedOut onClick={this.login} />
+                )}
+            </span>
+        );
+    }
 }
 ```
 
@@ -394,32 +391,25 @@ Each post is actually a reusable React component, only the content it contains i
 
 In this case, we can use an array of objects (each object contains the specific content of each post) to build our post list.
 
+```js
 const apple = (
-<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEgAAABICAMAAABiM0N1AAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAACKUEx URUdwTGiYNm6MOmmaNXKZQG6VPI+yZ3idSHSUQYCjUmeXNHCePnJVKI6xZW2fOWRDG5CzZ1o4F1qGLGdDHn20P6zUf3K7JLHXhbfajr3emMPhocnkq6bQeG ibMoXEQXzAMo3HT3a3LpXKXJ3NaXaqQG6iOX6tUIm2WlqNL3q2N5zCcpPAZZS2alAxDkhhy0YAAAAUdFJOUwDLQ5Ua995eDTOyfPyq4fj2s+iCxMw9HQAAB G9JREFUWMPVmOlyokAUhcPaCCIacQ0YlWaR5f1fb+7tBRoFJDNTNTWXipU/fJ5zN2g/Pv77MBc6IWSxcP6I4uiGZrFYuR5nOb+FcT+LOE1pxsMHYcQwf84x EEMRk+d5na+z3LYzf86d281m0SXHLRROXlVVXWfZmszgbJqm2cgcOMABVwAKGamqygr+sWc404OmCZbyG72CpUcqAkEZzet6jrOP7RJCSNJZmhEUZiFay1 JaJbW9mJVdRtKFsThFEk9SSOM0A2+1P6/65gZAWyFIiRgxVVLl8wTh/egN02kIABcFWaqwark3u3dIsAzAm6kVhchR1pY/z/35zehsgmALrVgUsmi05WSzj WEsgmDjkOLTg+lg/QhdxKuW2fqPBmMbBEQryIcDn5hlOWiZ/16PYy4I8YjOxlsPgs9Cg+F0VzEzaLF0a+Rt4U3i2+t1Xa/Xto/zvWmCYrWiaXqL91C2GFaI 4elv0+wQGyBlWUbwBzTbtgAETi6X7+89RJrG1ozVsfDXdRntdrvDAT4ipGVBU1T3+/XKSbcHTWPtXZ51GzGHLpC2bKwoUUlhGq+mtwcBjsAcjy3KAhAjgTs GektaCM5RxgEtHupmCaAKJQlSCEO7GndnAkfFACcqYaTyYMnG4irMIQhI2mgf+UwPQ5xYHA9RCXunaJoipjAVd0USuHNHOomsBefUBiPRYrksYG0kCcu3B IWpNZwm068jhXOGC1HgryyrMopEvlnhGAjMmSOCWs5ZBkNhAVlTJT1vY5KEoB7nLFW1INUbjd3B0kOGuCAEfEEIElPESJilrm4gaTVQOFKXQpDkCJQgDYJi MuWsxTDSszeeJA6i8evOdvxaOFMEMUmDoJsAGUNdvWudqYq4t+FshwM92eW6B/qSHfBsjZct1cZAL4q+phVpf0vRlLXT/GSP5ujFW7+PdokE3R6jVZOgHqm bNgRFXUNO9BErf2/Wvs59DnY2G//9ZGdjQ+5mTH8fNDBrAIp26l47i4WkCnpaI+HgQvJgz8rFf1J2ZDf7QtB0rvmilaTT8YUTDQgaHH58FEUtSY2DMKZs2i lnbGXvOOnQx0jOs6BhZ5CknD3zVdShw0RJoj6z+coefkTqWR1x0tOzX+p5EeQOv5OYWp5IErDYJTEtpydo7OnvZUhqUZIywhl7qmHdVtk9Yaioz0n6HFn7 8Xdsg+ZAQhSDMS0S03LeC0JJ4fWOKM4SFMB0HGlsIkPshEiRxFkyBOaJQ0dfRYQkerkyFMDuyLhfJeaJY02/RHophbvghep6ZxeGgpEcyLTx5t3YjW8XjOt FQlpMp2c609JcfIMbL5zAKYIj647Tar0/hZA43n8rsZdqFM5UCylpAhKLlvGEwZfHOcc0x5CkYQxwtHnHtD7phhQFE844PrQkcJfeWDwefcqPOJjxFZzvHi Fe/aCzfckl51qAwjsplQyIeQesJ3sanszxnBennIFHPpf8/Nci03M1zTXg0+IMw5txbBxhmfj9pk4MwyB/9kvYP4lfovMdXV5nBr8AAAAASUVORK5CYII=" />
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEgAAABICAMAAABiM0N1AAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAACKUEx URUdwTGiYNm6MOmmaNXKZQG6VPI+yZ3idSHSUQYCjUmeXNHCePnJVKI6xZW2fOWRDG5CzZ1o4F1qGLGdDHn20P6zUf3K7JLHXhbfajr3emMPhocnkq6bQeG ibMoXEQXzAMo3HT3a3LpXKXJ3NaXaqQG6iOX6tUIm2WlqNL3q2N5zCcpPAZZS2alAxDkhhy0YAAAAUdFJOUwDLQ5Ua995eDTOyfPyq4fj2s+iCxMw9HQAAB G9JREFUWMPVmOlyokAUhcPaCCIacQ0YlWaR5f1fb+7tBRoFJDNTNTWXipU/fJ5zN2g/Pv77MBc6IWSxcP6I4uiGZrFYuR5nOb+FcT+LOE1pxsMHYcQwf84x EEMRk+d5na+z3LYzf86d281m0SXHLRROXlVVXWfZmszgbJqm2cgcOMABVwAKGamqygr+sWc404OmCZbyG72CpUcqAkEZzet6jrOP7RJCSNJZmhEUZiFay1 JaJbW9mJVdRtKFsThFEk9SSOM0A2+1P6/65gZAWyFIiRgxVVLl8wTh/egN02kIABcFWaqwark3u3dIsAzAm6kVhchR1pY/z/35zehsgmALrVgUsmi05WSzj WEsgmDjkOLTg+lg/QhdxKuW2fqPBmMbBEQryIcDn5hlOWiZ/16PYy4I8YjOxlsPgs9Cg+F0VzEzaLF0a+Rt4U3i2+t1Xa/Xto/zvWmCYrWiaXqL91C2GFaI 4elv0+wQGyBlWUbwBzTbtgAETi6X7+89RJrG1ozVsfDXdRntdrvDAT4ipGVBU1T3+/XKSbcHTWPtXZ51GzGHLpC2bKwoUUlhGq+mtwcBjsAcjy3KAhAjgTs GektaCM5RxgEtHupmCaAKJQlSCEO7GndnAkfFACcqYaTyYMnG4irMIQhI2mgf+UwPQ5xYHA9RCXunaJoipjAVd0USuHNHOomsBefUBiPRYrksYG0kCcu3B IWpNZwm068jhXOGC1HgryyrMopEvlnhGAjMmSOCWs5ZBkNhAVlTJT1vY5KEoB7nLFW1INUbjd3B0kOGuCAEfEEIElPESJilrm4gaTVQOFKXQpDkCJQgDYJi MuWsxTDSszeeJA6i8evOdvxaOFMEMUmDoJsAGUNdvWudqYq4t+FshwM92eW6B/qSHfBsjZct1cZAL4q+phVpf0vRlLXT/GSP5ujFW7+PdokE3R6jVZOgHqm bNgRFXUNO9BErf2/Wvs59DnY2G//9ZGdjQ+5mTH8fNDBrAIp26l47i4WkCnpaI+HgQvJgz8rFf1J2ZDf7QtB0rvmilaTT8YUTDQgaHH58FEUtSY2DMKZs2i lnbGXvOOnQx0jOs6BhZ5CknD3zVdShw0RJoj6z+coefkTqWR1x0tOzX+p5EeQOv5OYWp5IErDYJTEtpydo7OnvZUhqUZIywhl7qmHdVtk9Yaioz0n6HFn7 8Xdsg+ZAQhSDMS0S03LeC0JJ4fWOKM4SFMB0HGlsIkPshEiRxFkyBOaJQ0dfRYQkerkyFMDuyLhfJeaJY02/RHophbvghep6ZxeGgpEcyLTx5t3YjW8XjOt FQlpMp2c609JcfIMbL5zAKYIj647Tar0/hZA43n8rsZdqFM5UCylpAhKLlvGEwZfHOcc0x5CkYQxwtHnHtD7phhQFE844PrQkcJfeWDwefcqPOJjxFZzvHi Fe/aCzfckl51qAwjsplQyIeQesJ3sanszxnBennIFHPpf8/Nci03M1zTXg0+IMw5txbBxhmfj9pk4MwyB/9kvYP4lfovMdXV5nBr8AAAAASUVORK5CYII=" />
 );
 
 const PeopleWantMessage = ({ icon, name }) => (
-
-<p>
-
-{name} want eat {icon}
-
-</p>
-
+    <p>
+        {name} want eat {icon}
+    </p>
 );
 
-const wantApple = ['zhangsan', 'lisi', 'wangmazi'];
+const wantApple = ["zhangsan", "lisi", "wangmazi"];
 
 const Apples = ({ peoples }) =>
+    peoples.map((name, index) => (
+        <PeopleWantMessage icon={apple} name={name} key={`${name}${index}`} />
+    ));
 
-peoples.map((name, index) => (
-
-<PeopleWantMessage icon={apple} name={name} key={`${name}${index}`} />
-
-));
-
-render(<Apples peoples={wantApple} />, document.querySelector('#app'));
-
+render(<Apples peoples={wantApple} />, document.querySelector("#app"));
 ```
 
 ## Forms
@@ -430,45 +420,39 @@ React is a unidirectional data flow, so filling out forms in React is a cumberso
 
 ![](https://image.slidesharecdn.com/react-150410184943-conversion-gate01/95/react-52-638.jpg?cb=1428692033)
 
+```js
 class TodoMvc extends Component {
-state = {
-todos: [],
-newItem: "",
-};
+    state = {
+        todos: [],
+        newItem: "",
+    };
 
-handleSubmit = (e) => {
-e.preventDefault();
-alert(this.state.newItem);
-};
+    handleSubmit = (e) => {
+        e.preventDefault();
+        alert(this.state.newItem);
+    };
 
-handleChange = (e) => this.setState({ newItem: e.target.value });
+    handleChange = (e) => this.setState({ newItem: e.target.value });
 
-render() {
-return (
-
-<form onSubmit={this.handleSubmit}>
-<header className="header">
-<h1>todos</h1>
-<input
-className="new-todo"
-placeholder="What needs to be done?"
-autofocus onChange={this.handleChange}
-
-value={this.state.newItem}
-
-/>
-
-</header>
-
-</form>
-
-);
-
-}
+    render() {
+        return (
+            <form onSubmit={this.handleSubmit}>
+                <header className="header">
+                    <h1>todos</h1>
+                    <input
+                        className="new-todo"
+                        placeholder="What needs to be done?"
+                        autofocus
+                        onChange={this.handleChange}
+                        value={this.state.newItem}
+                    />
+                </header>
+            </form>
+        );
+    }
 }
 
 render(<TodoMvc />, document.querySelector("#app"));
-
 ```
 
 [Another option, uncontrolled component](https://reactjs.org/docs/uncontrolled-components.html)
@@ -498,5 +482,3 @@ HTML template: `src/index.html`
 #Futherreading
 
 https://medium.com/shoutem/react-to-bind-or-not-to-bind-7bf58327e22a
-```
-````
