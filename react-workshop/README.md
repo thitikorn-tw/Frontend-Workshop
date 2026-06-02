@@ -24,8 +24,8 @@ render(<p>hello, world</p>, document.querySelector("#app"));
 
 JSX is an extension of JavaScript syntax. Using JSX, you can effectively describe UI elements within JavaScript.
 
-```
-js const element = <h1>Hello, world!</h1>;`
+```js
+const element = <h1>Hello, world!</h1>;`
 
 ```
 
