@@ -1,4 +1,4 @@
-# redux-workshop
+#redux-workshop
 
 ## Getting Started
 
@@ -14,83 +14,90 @@ You will also see any lint errors in the console.
 
 ---
 
-# 为什么需要 Redux
+# Why do we need Redux?
 
 ![you might not need redux](http://blog.isquaredsoftware.com/presentations/2018-03-redux-fundamentals/static/media/you-might-not-need-redux.6ed95d25.png)
 
-## 有什么问题
+## What's the problem?
 
-### jQuery 与 React 之间的交互
+### Interaction between jQuery and React
 
 https://codesandbox.io/s/0my672voxn
 
-### 跨多个组件的状态共享
+### State sharing across multiple components
 
-```
+```js
 App
-  ProductHouse  (updateHouseSelection price)
-    Total
-  ProductCar    (updateCarSelection price)
-    Total
-  SummaryPage   (subscribeProductChange)
-    ProductDetails
-    Total
+ProductHouse (updateHouseSelection price)
+
+Total
+ProductCar (updateCarSelection price)
+
+Total
+SummaryPage (subscribeProductChange)
+
+ProductDetails
+
+Total
 ```
 
-#### 需要都组织到 App 这个级别的组件吗？扩展性？
+#### Should all of these be organized into components at the App level? For scalability?
 
-#### 触发一次 Product 价格的更新用什么方法？
+#### What method should be used to trigger a product price update?
 
 `this.props.updateProduct({ name: 'car', price: 0 })`
 
-#### 计算 productTotal 的逻辑代码如何复用
+#### How to reuse the logic for calculating productTotal
 
+```js
+const total = _.sumBy(state.product, "price");
 ```
-const total = _.sumBy(state.product, 'price');
-```
 
-这段代码应该放在每个 `<Total />` 组件中吗
+Should this code be placed in each `<Total />` component?
 
-#### 如果整个应用的数据需要被客户端存储起来呢？(localStore)
+#### What if the entire application's data needs to be stored on the client side (localStore)?
 
-这部分存储逻辑写在哪？是否需要集中管理数据？如果数据分散在许多个 container 组件中，如何做到存储整个应用的数据？
+Where should this storage logic be written? Is centralized data management necessary? If data is distributed across many container components, how can you store all the data for the entire application?
 
-## 数据越来越多且越来越复杂，你需要一个集中管理数据的方案，保证你的 View 更加地轻量，反馈交互/渲染页面 react(data) => page
+## As data becomes increasingly abundant and complex, you need a centralized data management solution to ensure your View remains lightweight and provides feedback/rendering: react(data) => page
 
-# 什么是 Redux
+# What is Redux?
 
 ## Redux Principles
 
-### 单一数据源
+### Single Data Source
 
 ![6024ef30-312a-4c7c-bfd2-eb72fba097ef](md/6024ef30-312a-4c7c-bfd2-eb72fba097ef.png)
 
-### state 是只读的
+### State is read-only
 
-### 通过纯函数派生 state
+### Deriving state from pure functions
 
 ![1_wLRhZ0wtI0duLsigdxL1CA](md/1_wLRhZ0wtI0duLsigdxL1CA.png)
 
-## 基本概念
+## Basic Concepts
 
 ### Actions
 
-1. Action 是一个 Plain Object
-2. Action 必须声明 type
+1. An Action is a Plain Object
+
+2. Actions must be declared type
 
 ```js
 const ADD_TODO = "ADD_TODO";
 
 const action = {
   type: ADD_TODO,
+
   text: "Build my first Redux app",
 };
 ```
 
 ### Reducers
 
-Reducer 是一个纯函数
-Reducer 对于不同的 Action 进行响应
+A Reducer is a pure function
+
+A Reducer responds to different Actions
 
 ```js
 (previousState, action) => newState;
@@ -99,24 +106,26 @@ Reducer 对于不同的 Action 进行响应
 #### Never Do
 
 1. Mutate its arguments;
+
 2. Perform side effects like API calls and routing transitions;
-3. Call non-pure functions, e.g. Date.now() or Math.random().
+
+3. Call non-pure functions, e.g., Date.now() or Math.random().
 
 ### Store
 
-- 保存应用状态的仓库
+- The repository that stores the application state
 
-- 通过 `getState()` 访问;
+- Accessed via `getState()`;
 
-- 通过 `dispatch(action)` 更新我们的 state;
+- Updated our state via `dispatch(action)`;
 
-- 通过 `subscribe(listener)` 来响应 store 的变化;
+- Responded to store changes via `subscribe(listener)`;
 
-## 数据流动
+## Data Flow
 
-![redux-data-flow-with-angular-2-19-638](https://camo.githubusercontent.com/5aba89b6daab934631adffc1f301d17bb273268b/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6d656469612d702e736c69642e65732f75706c6f6164732f3336343831322f696d616765732f323438343535322f415243482d5265647578322d7265616c2e676966)
+![redux-data-flow-with-angular-2-19-638](https://camo.githubusercontent.com/5aba89b6daab934631adffc1f301d17bb273268b/68747470733a2f2f73332e616d617a6f) 6e6177732e636f6d2f6d656469612d702e736c69642e65732f75706c6f6164732f333634383 1322f696d616765732f323438343535322f415243482d5265647578322d7265616c2e676966)
 
-## 和 React 配合使用
+## Using with React
 
 ### Presentation & Container
 
@@ -126,51 +135,52 @@ Reducer 对于不同的 Action 进行响应
 
 1. Provider
 
-Provider 提供 Store 的注入
+Provider provides injection into the Store
 
 2. Connect(mapStateToProps, mapDispatchToProps)
 
-将 React 组件接入 Store
+Connects React components to the Store
 
 3. mapStateToProps
 
-store.getState()的语法糖
+Syntactic sugar for store.getState()
 
 4. mapDispatchToProps
 
-store.dispatch()的语法糖
+Syntactic sugar for store.dispatch()
 
-# 语重心长的总结
+# A heartfelt summary
 
-## Well Redux is just a pattern
+## Well, Redux is just a pattern
 
-```
-import React, { Component } from 'react';
+```js
+import React, { Component } from "react";
 
 const counter = (state = { value: 0 }, action) => {
   switch (action.type) {
-    case 'INCREMENT':
+    case "INCREMENT":
       return { value: state.value + 1 };
-    case 'DECREMENT':
+
+    case "DECREMENT":
       return { value: state.value - 1 };
     default:
       return state;
   }
-}
+};
 
 class Counter extends Component {
   state = counter(undefined, {});
 
   dispatch(action) {
-    this.setState(prevState => counter(prevState, action));
+    this.setState((prevState) => counter(prevState, action));
   }
 
   increment = () => {
-    this.dispatch({ type: 'INCREMENT' });
+    this.dispatch({ type: "INCREMENT" });
   };
 
   decrement = () => {
-    this.dispatch({ type: 'DECREMENT' });
+    this.dispatch({ type: "DECREMENT" });
   };
 
   render() {
@@ -180,7 +190,7 @@ class Counter extends Component {
         <button onClick={this.increment}>+</button>
         <button onClick={this.decrement}>-</button>
       </div>
-    )
+    );
   }
 }
 ```
@@ -193,7 +203,7 @@ class Counter extends Component {
 
 [Redux author Dan Abramov egghead videos](https://egghead.io/instructors/dan-abramov)
 
-# Recommended Tools
+#RecommendedTools
 
 - [React Developer Tools](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi?hl=en)
 - [Redux DevTools](https://chromewebstore.google.com/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd?pli=1)
