@@ -150,6 +150,8 @@ window.onload = function () {
 
 > Exercise: Open NGBE and find the element with `id=submit_button` on the Flight page.
 
+const submitBtn = document.getElementById('submit_button');
+
 ### Element
 
 > The Element object corresponds to the HTML element of the webpage. Every HTML element is converted into an Element node object in the DOM tree.
@@ -176,7 +178,11 @@ window.onload = function () {
 
 **Element.remove()** -- Removes the current element node from the DOM tree.
 
-Exercise: Open NGBE and delete the element with `id=submit_button` on the Flight page.
+> Exercise: Open NGBE and delete the element with `id=submit_button` on the Flight page.
+
+const submitBtn = document.getElementById('submit_button');
+
+submitBtn.remove();
 
 ### Event
 
