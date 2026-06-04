@@ -1,17 +1,20 @@
 # Testing
+
 ## Guideline
 
-1. **Jest, Enzyme介绍**
-2. **测试脚本编写**
-3. **执行及调试测试**
-4. **项目中的测试实践**
-5. **回顾**
-5. **参考资料**
+1. **Introduction to Jest and Enzyme**
 
+2. **Test Script Writing**
 
+3. **Executing and Debugging Tests**
 
+4. **Testing Practices in Projects**
 
-## 0. Before start
+5. **Review**
+
+6. **References**
+
+## 0. Before Start
 
 [code base](https://github.com/jungleli/workshop-test)
 
@@ -19,9 +22,7 @@ vscode plugin (jest)
 
 Q:
 
-前端测试测什么？
-
-
+What does front-end testing test?
 
 ## 1. Jest , Enzyme
 
@@ -29,47 +30,50 @@ Q:
 
 🃏 Delightful JavaScript Testing
 
-> Jest is used by Facebook to test all JavaScript code including React applications	
+> Jest is used by Facebook to test all JavaScript code including React applications
 
-react友好、snapshot、自带断言库、自带Mock库、test runner、report
+React friendly, snapshot, built-in assertion library, built-in Mock library, test runner, report
 
-*[Test React Apps](https://facebook.github.io/jest/docs/en/tutorial-react.html)*
+_[Test React Apps](https://facebook.github.io/jest/docs/en/tutorial-react.html)_
 
-- #### 常用方法
+- #### Common methods
 
-  - Methods
-    - beforeEach  /  beforeAll
-    - afterEach  /  afterAll
-    - describe  /  describe.skip
-    - test  /  test.skip
+- Methods
+- beforeEach / beforeAll
+- afterEach/afterAll
+- describe / describe.skip
+  -test/test.skip
 
+-asserts
+-expect
 
-  - asserts
-    - expect
-    - .toBe(value)
-    - .toEqual(value)
-    - .toContain(item)
-    - .toMatch(regexOrString)
-    - .toMatchSnapshot()
-    - .toHaveBeenCalled()
-    -  [more asserts](https://facebook.github.io/jest/docs/en/expect.html#methods)
-  - mock a function
-    -  `jest.fn()`
-    - `mockFn.mockReturnValue(value)`
-    - `mockFn.mockImplementation(fn)`
-    - `jest.disableAutomock()`
-    - [more](https://facebook.github.io/jest/docs/en/mock-functions.html#mock-property)
+- .toBe(value)
+- .toEqual(value)
+- .toContain(item)
+- .toMatch(regexOrString)
+- .toMatchSnapshot()
+- .toHaveBeenCalled()
+- [more [asserts](https://facebook.github.io/jest/docs/en/expect.html#methods)
 
+- Mock a function
 
+- `jest.fn()`
 
+- `mockFn.mockReturnValue(value)`
+
+- `mockFn.mockImplementation(fn)`
+
+- `jest.disableAutomock()`
+
+- [more](https://facebook.github.io/jest/docs/en/mock-functions.html#mock-property)
 
 ### Enzyme
 
-> Enzyme 是一个 React 的 JavaScript 测试工具，能够让断言、操作以及遍历你的 React 组件的输出变得更简单。
+> Enzyme is a JavaScript testing tool for React that simplifies assertions, manipulations, and iterating over the output of your React components.
 
-*[react test utils](https://reactjs.org/docs/test-utils.html)*， *[jsdom](https://github.com/jsdom/jsdom)*，*[cheerio](https://github.com/cheeriojs/cheerio)*
+_[react test utils](https://reactjs.org/docs/test-utils.html)_, _[jsdom](https://github.com/jsdom/jsdom)_, _[cheerio](https://github.com/cheeriojs/cheerio)_
 
-Render 方法：
+Render Methods:
 
 1. Shallow Rendering
 
@@ -77,209 +81,208 @@ Render 方法：
 
 3. Static Rendering
 
-   ####1.  Shallow Rendering
+####1. Shallow Rendering
 
-   只渲染当前组件，不关心子组件的渲染。这是比较推荐的一种render方法，只测试当前组件，减少组件间的依赖。
+This method only renders the current component, without considering the rendering of child components. It's a recommended rendering method, testing only the current component and reducing dependencies between components.
 
-   example
+Example
 
-   ```
-   const ButtonWithIcon = ({icon, children}) => (
-       <button><Icon icon={icon} />{children}</button>
-   );
-   ```
+```js
+const ButtonWithIcon = ({ icon, children }) => (
+  <button>
+    <Icon icon={icon} />
+    {children}
+  </button>
+);
+```
 
-   渲染到页面的结果
+Result rendered on the page
 
-   ```
-   <button>
-       <i class="icon icon_coffee"></i>
-       Hello Jest!
-   </button>
-   ```
+```js
+<button>
+  <i class="icon icon_coffee"></i>
+  Hello Jest!
+</button>
+```
 
-   shallow render的结果：
+Result of shallow render:
 
-   ```
-   <button>
-       <Icon icon="coffee" />
-       Hello Jest!
-   </button>
-   ```
+```js
+<button>
+  <Icon icon="coffee" />
+  Hello Jest!
+</button>
+```
 
-   子组件Icon未被渲染
+Child component Icon not rendered
 
-   ​
+​
 
-   #### 2. Render （Static Rendering）
+#### 2. Render (Static Rendering)
 
-   render方法的输出是静态HTLM结构，enzyme使用第三方HTML解析库[Cheerio](https://github.com/cheeriojs/cheerio)完成渲染，渲染返回的是[Cheerio](https://github.com/cheeriojs/cheerio)对象。
+The output of the render method is a static HTML structure. Enzyme uses the third-party HTML parsing library [Cheerio](https://github.com/cheeriojs/cheerio) to complete the rendering. The rendering returns a [Cheerio](https://github.com/cheeriojs/cheerio) object. (Trap: Most enzyme APIs are unavailable)
 
-   (坑点：大部分enzyme API 不可使用）
+#### 3. Mount (Full DOM Rendering)
 
-   #### 3. Mount （Full DOM Rendering）
+Renders the component along with its child components, requiring all dependencies to be provided. The `mount` method depends on the DOM; the `jsdom` library can be used to simulate a browser environment. Use cases: Tests components with DOM interactions and lifecycles, such as click events or state changes.
 
-   连同子组件一起渲染，需要提供所有的依赖。mount方法依赖DOM，可以使用jsdom库，来模拟浏览器环境。应用场景：可以测试存在dom交互行为的组件以及有life cycle的组件。比如click事件，或者state状态的改变。
+Note:
 
-   注意：
+- The `mount` method actually mounts the component to the DOM, meaning tests between components under the same parent node may interfere with each other. After a test, `.unmount()` can be used to clean up.
 
-   - mount方法，实际上会将组件挂载到DOM中，这意味着在同一个父节点下的组件间的测试可能会相互影响。 在一个测试结束后，可以使用.unmount()清理。
-   - jsdom本质上是一个完全在 JavaScript 中实现的 headless 浏览器。
+- `jsdom` is essentially a headless browser implemented entirely in JavaScript.
 
-   ​
+#### Common Methods
 
-   ​
+- simulate: Simulate events, such as onClick, onChange
 
-#### 常用方法
+- html: Returns the rendered HTML
 
-- simulate 模拟事件， 比如onClick, onChange
+- state: Gets the component's state object
 
-- html 返回render后的html
+- props: Gets the component's props
 
-- state  获取组件state对象
+- update: Forces a re-render, simulating changes in the component's state caused by external events
 
-- props 获取组件props
+- mount/unmount: Simulates the component's life cycle, componentWillMount/componentWillUnmount
 
-- update  强行re-render，可以模拟由外部事件引起的组件state变化
+#### Selectors (DOM Search)
 
-- mount/unmount 模拟组件life cycle，componentWillMount/componentWillUnmount
+**Usage:** `.find(selector)`
 
-  ​
-
-  #### Selectors (查找DOM)
-
-  **用法：** `.find(selector)`
-
-- class(.foo, .foo-bar), element(div, button),id(#foo), attribute([href="foo"])
+- class(.foo, .foo-bar), element(div, button), id(#foo), attribute([href="foo"])
 
 - props
 
-  ```
-  const wrapper = mount((
-    <div>
-      <span foo={3} bar={false} title="baz" />
-    </div>
-  ));
+```js
+const wrapper = mount(
+  <div>
+    <span foo={3} bar={false} title="baz" />
+  </div>,
+);
 
-  wrapper.find('[foo=3]');
-  wrapper.find('[bar=false]');
-  wrapper.find('[title="baz"]');
-  ```
+wrapper.find("[foo=3]");
+wrapper.find("[bar=false]");
 
-  [more selectors](http://airbnb.io/enzyme/docs/api/selector.html)
+wrapper.find('[title="baz"]');
+```
 
-
+[more selectors](http://airbnb.io/enzyme/docs/api/selector.html)
 
 ## 2. Write your tests
 
-Open counter folder，follow the README to start write your tests.
+Open the counter folder, follow the README to start writing your tests.
 
-- #### UI 测试
+- #### UI Testing
 
-  - #### 组件渲染
+- #### Component Rendering
 
-  - #### Props
+- #### Props
 
-  - #### 事件响应
+- #### Event Handling
 
+- #### Reducer Testing
 
-- #### Reducer测试
+```js
+test("should handle INCREMENT action", () => {
+  expect(counter(1, { type: "INCREMENT" })).toBe(2);
+});
+```
 
-  ``` 
-  test("should handle INCREMENT action", () => {
-        expect(counter(1, { type: "INCREMENT" })).toBe(2);
-      });
-  ```
+​
 
-  ​
+Reference: [Reducer Tests](https://cn.redux.js.org/docs/recipes/WritingTests.html)
 
-  参考：[Reducer Tests](https://cn.redux.js.org/docs/recipes/WritingTests.html)
+## 3. Jest CLI — Run tests
 
+1. #### Run all tests
 
+- `jest`
 
-
-## 3.  Jest Cli — Run tests
-
-1. #### Run all tests 
-
-   - `jest`
-   - VS Code （Plugin： Jest）
-
+- VS Code (Plugin: Jest)
 
 2. #### Run single test
 
-   - 模糊匹配测试文件名和路径`jest fileName or Path`  
+- Fuzzy matching of test filename and path `jest fileName or Path`
 
-3. #### Debuge Tests
+3. #### Debug test
 
 4. #### Update snapshot
 
-   - `jest -u`
+- `jest -u`
 
 5. #### Test coverage
 
-   测试覆盖率工具Istanbul*
+Test coverage tool Istanbul\*
 
-```
-jest --coverage
+```js
+  jest --coverage
 ```
 
 - coverage folder
 
 - coverage report
 
-  ![coverage report](images/coverge.png)
-
-  ​
-
-  ​
-
-
+![coverage report](images/coverge.png)
 
 ## 4. Test conventions in our project
 
 1. #### NGBE
 
-   - Folder
-     - `Web.JasmineTests/Components`,` Web.JasmineTests/dataStore`,
-   - Naming
-     - `XXXTest.js`
+- Folder
+
+- `Web.JasmineTests/Components`, `Web.JasmineTests/dataStore`,
+
+- Naming
+
+- `XXXTest.js`
 
 2. #### MMB
 
-   - Folder
-     - `__test__`
+- Folder
 
-   - Naming
-     - Files with `.test.js` suffix.
+- `__test__`
 
-   - JCL
-     - 测试代码和源代码放在一个文件夹下，就近原则
-     - 文件名以`.test.js`结尾
+- Naming
 
-   - Coverage
-     - Component （basic UI)
-     - Datastore (90%+)
-     - Utils (90%+)
+- Files with `.test.js` suffix.
 
+- JCL
 
+- Test code and source code are placed in the same folder, based on proximity.
 
+- Filenames end with `.test.js`.
 
-## 5. 回顾
+- Coverage
 
-- Why Jest： 配置简单、react友好、支持DOM API、并行执行测试用例、snapshot、自带断言库、内置reprot、自动mock ES modules、好用的CLI，
-- 前端测试关注点
-- 生成的snapshot也是项目代码一部分，需要被正确的提交和review
-- Snapshot中不能依赖不确定的代码
-  - 比如 Date.now(), 遇到返回不确定值得代码需要mock ```Date.now = jest.fn(() => 1482363367071);``` 
-- Snapshot测试命名要表意 
-- test-driven with snapshot?
+- Component (basic UI)
 
-## 6. 参考资料
+- Datastore (90%+)
+
+- Utils (90%+)
+
+## 5. Review
+
+- Why Jest: Simple configuration, React-friendly, supports DOM API, parallel execution of test cases, snapshots, built-in assertion library, built-in report, automatic mock ES modules, user-friendly CLI,
+
+- Front-end testing focus
+
+- The generated snapshot is also part of the project code and needs to be properly committed and reviewed.
+
+- Snapshots should not rely on uncertain code.
+
+- For example, `Date.now()` should be mocked if it returns an uncertain value: `Date.now = jest.fn(() => 1482363367071);`
+
+- Snapshot test names should be meaningful.
+
+- Test-driven with snapshot?
+
+## 6. References
 
 1. [Jest](https://facebook.github.io/jest/docs/en/getting-started.html)
-2. [Enzyme API](http://airbnb.io/enzyme/docs/api/)
-3. [Jest Configure](https://facebook.github.io/jest/docs/en/configuration.html)
-4. [Reducer Tests](https://cn.redux.js.org/docs/recipes/WritingTests.html)
 
-   ​
+2. [Enzyme API](http://airbnb.io/enzyme/docs/api/)
+
+3. [Jest Configure](https://facebook.github.io/jest/docs/en/configuration.html)
+
+4. [Reducer Tests](https://cn.redux.js.org/docs/recipes/WritingTests.html)
